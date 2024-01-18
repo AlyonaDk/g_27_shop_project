@@ -9,14 +9,13 @@ import de.aittr.g_27_shop_project.domain.interfaces.Cart;
 
 import de.aittr.g_27_shop_project.domain.interfaces.Product;
 
-import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import static de.aittr.g_27_shop_project.repositories.DBConnector.getConnection;
+
 public class CommonCustomerRepository implements CustomerRepository {
     private final String ID = "id";
     private final String CUSTOMER_ID = "cu.id";
@@ -29,7 +28,7 @@ public class CommonCustomerRepository implements CustomerRepository {
 
     @Override
     public Customer save(Customer customer) {
-        try (Connection connection = getConnection()) {
+        try (Connection connection = DBConnector.getConnection()) {
 
             String query = String.format("INSERT INTO `customer` (`name`, `is_active`) " +
                     "VALUES ('%s', '1');", customer.getName());
@@ -62,7 +61,7 @@ public class CommonCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> getAll() {
-        try (Connection connection = getConnection()) {
+        try (Connection connection = DBConnector.getConnection()) {
 
             String query = "select cu.id, cu.name, ca.id, cp.product_id, p.name, p.price, p.is_active " +
                     "from customer as cu " +
