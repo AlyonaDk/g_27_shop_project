@@ -15,8 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-@Repository
 
+import static de.aittr.g_27_shop_project.repositories.DBConnector.getConnection;
+@Repository
 public class CommonCustomerRepository implements CustomerRepository {
     private final String ID = "id";
     private final String CUSTOMER_ID = "cu.id";
@@ -29,7 +30,7 @@ public class CommonCustomerRepository implements CustomerRepository {
 
     @Override
     public Customer save(Customer customer) {
-        try (Connection connection = DBConnector.getConnection()) {
+        try (Connection connection = getConnection()) {
 
             String query = String.format("INSERT INTO `customer` (`name`, `is_active`) " +
                     "VALUES ('%s', '1');", customer.getName());
@@ -62,7 +63,7 @@ public class CommonCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> getAll() {
-        try (Connection connection = DBConnector.getConnection()) {
+        try (Connection connection = getConnection()) {
 
             String query = "select cu.id, cu.name, ca.id, cp.product_id, p.name, p.price, p.is_active " +
                     "from customer as cu " +
@@ -74,14 +75,17 @@ public class CommonCustomerRepository implements CustomerRepository {
             ResultSet resultSet = connection.createStatement().executeQuery(query);
             Map<Integer, Customer> customers = new HashMap<>();
 
+            // "id"   "cu.id"
             while (resultSet.next()) {
 
                 int customerId = resultSet.getInt(CUSTOMER_ID);
                 Customer customer;
 
+                // Создаём объект покупателя либо получаем его из мапы, если он уже был ранее создан
                 if (customers.containsKey(customerId)) {
                     customer = customers.get(customerId);
                 } else {
+                    // Создаём объект корзины
                     int cartId = resultSet.getInt(CART_ID);
                     Cart cart = new CommonCart(cartId);
 
@@ -89,6 +93,9 @@ public class CommonCustomerRepository implements CustomerRepository {
                     customer = new CommonCustomer(customerId, true, customerName, cart);
                     customers.put(customerId, customer);
                 }
+
+                // Создаём объект продукта и помещаем его в корзину
+                // (если продукт активен)
                 boolean isProductActive = resultSet.getBoolean(IS_ACTIVE);
                 if (isProductActive) {
                     int productId = resultSet.getInt(PRODUCT_ID);
