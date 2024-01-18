@@ -1,20 +1,21 @@
 package de.aittr.g_27_shop_project.repositories;
 
-import de.aittr.g_27_shop_project.domain.interfaces.Customer;
-import de.aittr.g_27_shop_project.repositories.interfaces.CustomerRepository;
 import de.aittr.g_27_shop_project.domain.CommonCart;
 import de.aittr.g_27_shop_project.domain.CommonCustomer;
 import de.aittr.g_27_shop_project.domain.CommonProduct;
 import de.aittr.g_27_shop_project.domain.interfaces.Cart;
-
+import de.aittr.g_27_shop_project.domain.interfaces.Customer;
 import de.aittr.g_27_shop_project.domain.interfaces.Product;
+import de.aittr.g_27_shop_project.repositories.interfaces.CustomerRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+@Repository
 
 public class CommonCustomerRepository implements CustomerRepository {
     private final String ID = "id";
