@@ -8,7 +8,7 @@ import de.aittr.g_27_shop_project.services.mapping.ProductMappingService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
+//update branch
 //@Service
 public class CommonProductService implements ProductService {
 
