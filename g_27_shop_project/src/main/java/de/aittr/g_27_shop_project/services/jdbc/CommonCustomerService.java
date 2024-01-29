@@ -1,4 +1,4 @@
-package de.aittr.g_27_shop_project.services;
+package de.aittr.g_27_shop_project.services.jdbc;
 
 import de.aittr.g_27_shop_project.domain.interfaces.Customer;
 import de.aittr.g_27_shop_project.repositories.interfaces.CustomerRepository;
@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
 @Service
 public class CommonCustomerService implements CustomerService {
+
     private CustomerRepository repository;
 
     public CommonCustomerService(CustomerRepository repository) {
@@ -94,5 +96,4 @@ public class CommonCustomerService implements CustomerService {
     public void clearCartById(int customerId) {
 
     }
-
 }

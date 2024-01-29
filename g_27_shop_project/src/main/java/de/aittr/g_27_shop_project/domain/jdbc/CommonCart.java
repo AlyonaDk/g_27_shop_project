@@ -1,4 +1,5 @@
-package de.aittr.g_27_shop_project.domain;
+package de.aittr.g_27_shop_project.domain.jdbc;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.aittr.g_27_shop_project.domain.interfaces.Cart;
 import de.aittr.g_27_shop_project.domain.interfaces.Product;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonCart implements Cart {
+
     private int id;
     private List<Product> products = new ArrayList<>();
 
@@ -20,6 +22,16 @@ public class CommonCart implements Cart {
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -60,4 +72,3 @@ public class CommonCart implements Cart {
                 .orElse(0);
     }
 }
-

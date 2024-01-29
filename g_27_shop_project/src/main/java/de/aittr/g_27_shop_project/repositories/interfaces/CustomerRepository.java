@@ -5,6 +5,7 @@ import de.aittr.g_27_shop_project.domain.interfaces.Customer;
 import java.util.List;
 
 public interface CustomerRepository {
+
     Customer save(Customer customer);
 
     List<Customer> getAll();

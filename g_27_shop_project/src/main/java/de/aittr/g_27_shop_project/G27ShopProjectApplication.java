@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class G27ShopProjectApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(G27ShopProjectApplication.class, args);
 	}
+
 }
